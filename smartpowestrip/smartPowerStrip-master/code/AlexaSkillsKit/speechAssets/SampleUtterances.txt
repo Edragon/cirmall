@@ -1,0 +1,16 @@
+AMAZON.HelpIntent what can I say
+AMAZON.HelpIntent what can you do
+AMAZON.HelpIntent what can I ask you
+
+onOffIntent to turn 	{onOrOff} the 	{deviceName}
+onOffIntent to turn the {deviceName} 	{onOrOff}
+onOffIntent turn 	 	{deviceName} 	{onOrOff}
+onOffIntent turn the 	{deviceName} 	{onOrOff}
+onOffIntent turn 	 	{deviceName} {onOrOff} to {brightnessCmd} 
+onOffIntent turn the 	{deviceName} {onOrOff} to {brightnessCmd} 
+onOffIntent to turn the {deviceName} {onOrOff} to {brightnessCmd} 
+onOffIntent turn the 	{deviceName} to {brightnessCmd} 
+onOffIntent turn the 	{deviceName} to {brightnessCmd} brightness
+onOffIntent turn the 	{deviceName} to {brightnessCmd} percent
+onOffIntent to turn the {deviceName} to {brightnessCmd} percent
+onOffIntent turn the 	{deviceName} to {brightnessCmd} percent brightness

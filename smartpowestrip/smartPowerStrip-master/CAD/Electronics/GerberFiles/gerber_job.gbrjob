@@ -1,0 +1,13 @@
+G04 Gerber job file.*
+%TF.FileFunction,JobInfo*%
+%TF.GenerationSoftware,Autodesk,EAGLE,8.6.0*%
+%TF.CreationDate,2018-02-02T01:37:18Z*%
+%TF.Part,Single*%
+%MOMM*%
+%TJ.B_Owner,Arturo Jumpa <arturju@hotmail.com>*%
+%TJ.B_ID,smartPowerStrip*%
+%TJ.B_LayerNum,2*%
+%TJ.B_Thickness,1.570000*%
+%TJ.B_Size_X,58.090000*%
+%TJ.B_Size_Y,48.250000*%
+M02*

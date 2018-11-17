@@ -1,0 +1,29 @@
+# Eagle junk
+*.b#?
+*.s#?
+*.l#?
+*.b$?
+*.s$?
+*.l$?
+*.pro
+*.job
+*.lck
+
+# OS generated files
+.DS_Store?
+.DS_Store
+._*
+.__*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Zip and config files
+.zip
+config.js
+
+# ignore files with AWS key 
+keys.cpp
+aj/
+code/AlexaSkillsKit/Esp8266DynamoDB/keys.cpp
