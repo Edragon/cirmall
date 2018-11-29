@@ -1,0 +1,8 @@
+"DS18B20.obj",
+"DS1302.obj",
+"keyboard.obj",
+"Lcd1602.obj",
+"main.obj",
+"Time.obj" 
+TO "Nao" 
+RAMSIZE(256) 

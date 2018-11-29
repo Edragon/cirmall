@@ -1,0 +1,226 @@
+C51 COMPILER V9.02   MAIN                                                                  01/10/2009 00:34:35 PAGE 1   
+
+
+C51 COMPILER V9.02, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN main.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE main.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          /*
+   2          *******************************************************************************
+   3          *                     《手把手教你学51单片机(C语言版)》
+   4          *                    配套 KST-51 单片机开发板 示例源代码
+   5          *
+   6          *         (c) 版权所有 2014 金沙滩工作室/清华大学出版社 保留所有权利
+   7          *                 获取更多资料请访问：http://www.kingst.org
+   8          *
+   9          * 文件名：main.c
+  10          * 描  述：第19章 多功能电子钟 工程主文件
+  11          * 版本号：v1.0.0
+  12          * 备  注：详情见第19章19.4节
+  13          *******************************************************************************
+  14          */
+  15          
+  16          #define  _MAIN_C
+  17          #include "config.h"
+  18          #include "Lcd1602.h"
+  19          #include "keyboard.h"
+  20          #include "DS1302.h"
+  21          #include "DS18B20.h"
+  22          #include "Time.h"
+  23          #include "main.h"
+  24          
+  25          bit flag2s = 0;    //2s定时标志位
+  26          bit flag200ms = 0; //200ms定时标志
+  27          uint8 T0RH = 0;    //T0重载值的高字节
+  28          uint8 T0RL = 0;    //T0重载值的低字节
+  29          enum eStaSystem staSystem = E_NORMAL;  //系统运行状态
+  30           uint8 code table[]={0x00,0x00,0x00,0x1F,0x00,0x00,0x00,0x00,
+  31          
+  32          0x00,0x00,0x0E,0x00,0x00,0x1F,0x00,0x00, 
+  33          
+  34          0x00,0x00,0x0E,0x00,0x0E,0x00,0x1F,0x00,
+  35          
+  36          0x00,0x1F,0x15,0x15,0x1B,0x11,0x1F,0x00,
+  37          
+  38          0x00,0x1E,0x08,0x1E,0x0A,0x0A,0x0A,0x1F,
+  39          
+  40          0x00,0x04,0x00,0x1F,0x0A,0x11,0x11,0x00,
+  41          
+  42          0x00,0x1F,0x11,0x11,0x1F,0x11,0x11,0x1F,
+  43          
+  44          0x00,0x04,0x0E,0x0E,0x0E,0x1F,0x00,0x0E };       
+  45          
+  46          void main()
+  47          {
+  48   1              uint8 ledsj=0;
+  49   1          EA = 1;           //开总中断
+  50   1          ConfigTimer0(1);  //配置T0定时1ms
+  51   1          InitDS1302();     //初始化实时时钟模块
+  52   1          InitLcd1602();    //初始化液晶模块
+  53   1              LED=0;
+  54   1              WriteROM();
+  55   1          Start18B20();     //启动首次温度转换
+C51 COMPILER V9.02   MAIN                                                                  01/10/2009 00:34:35 PAGE 2   
+
+  56   1           LcdShowStr(2, 0,"Zhao Wen jie");
+  57   1                LcdShowStr(0, 1,"Qichuangnaozhong");
+  58   1         while (!flag2s);  //上电后延时2秒
+  59   1          flag2s = 0;
+  60   1         LcdClearScreen();  //液晶清屏
+  61   1         RefreshDate(1);   //立即刷新日期显示
+  62   1         RefreshTemp(1);   //立即刷新温度显示
+  63   1         RefreshTime();   //刷新当前时间
+  64   1      
+  65   1          
+  66   1          while (1)  //进入主循环
+  67   1          {
+  68   2              KeyDriver();      //执行按键驱动
+  69   2                      
+  70   2              if (flag200ms)    //每隔200ms执行以下分支
+  71   2              {
+  72   3                  flag200ms = 0;
+  73   3                      
+  74   3                 
+  75   3                 if (staSystem == E_NORMAL)  //正常运行时刷新日期显示
+  76   3                  {
+  77   4                                      AlarmMonitor();  //监控闹钟
+  78   4                                      if(key==0)
+  79   4                                              {
+  80   5                                              if(bakekey==0)
+  81   5                                                              {
+  82   6                                                                      LcdClearScreen();  //液晶清
+  83   6                                                                      RefreshDate(1);   //立即刷新日期显示
+  84   6                                                              RefreshTemp(1);   //立即刷新温度显示
+  85   6                                                                      bakekey=1;
+  86   6                                                              }
+  87   5                                                       if(bakekey==1)
+  88   5                                                              {
+  89   6                                                                      RefreshTime();   //刷新当前时间
+  90   6                                                                      RefreshDate(0);   //立即刷新日期
+  91   6                                                              }
+  92   5                                                      else
+  93   5                                                      {
+  94   6                                                              ;;
+  95   6                                                      }                  
+  96   5                                              }
+  97   4                                      else
+  98   4                                              {
+  99   5                                                              LcdClearScreen();  //液晶清屏
+ 100   5                                                      RefreshAlarm();
+ 101   5                                              }   
+ 102   4                              
+ 103   4                  }
+ 104   3             }
+ 105   2            if (flag2s)  //每隔2s执行以下分支
+ 106   2              {
+ 107   3                              flag2s = 0;
+ 108   3                              if (staSystem == E_NORMAL)  //正常运行时刷新日期显示
+ 109   3                                      {
+ 110   4                                              ledsj++;
+ 111   4                                              if(ledsj>=30)
+ 112   4                                                      {
+ 113   5                                                              ledsj=0;
+ 114   5                                                              LED=1;
+ 115   5                                                      }
+ 116   4                      
+ 117   4                              RefreshTemp(0);
+C51 COMPILER V9.02   MAIN                                                                  01/10/2009 00:34:35 PAGE 3   
+
+ 118   4                                }
+ 119   3              } 
+ 120   2          }    
+ 121   1      }
+ 122          /* 温度刷新函数，读取当前温度并根据需要刷新液晶显示，
+ 123          ** ops-刷新选项：为0时只当温度变化才刷新，非0则立即刷新 */
+ 124          void RefreshTemp(uint8 ops)
+ 125          {
+ 126   1          int16 temp;
+ 127   1          uint8 pdata str[8];
+ 128   1          static int16 backup = 0;
+ 129   1          
+ 130   1          Get18B20Temp(&temp); //获取当前温度值16bit
+ 131   1          Start18B20();        //启动下一次转换
+ 132   1          temp >>= 4;          //舍弃4bit小数位
+ 133   1          if ((backup!=temp) || (ops!=0)) //按需要刷新液晶显示
+ 134   1          {
+ 135   2                      if((temp>>7)&0x1f)
+ 136   2                              {
+ 137   3                                LcdShowChar(12, 1, '-');
+ 138   3                                temp=(uint8)temp<<5;
+ 139   3                                temp=~(temp)+1;
+ 140   3                              }
+ 141   2      
+ 142   2              str[0] = (temp/10) + '0';  //十位转为ASCII码
+ 143   2              str[1] = (temp%10) + '0';  //个位转为ASCII码       
+ 144   2              str[2] = 'C';
+ 145   2              str[3] = '\0';             //字符串结束符
+ 146   2              LcdShowStr(13, 1, str);    //显示到液晶上
+ 147   2              backup = temp;             //刷新上次温度值
+ 148   2          }
+ 149   1      }
+ 150          /* 配置并启动T0，ms-T0定时时间 */
+ 151          void ConfigTimer0(uint16 ms)
+ 152          {
+ 153   1          uint32 tmp;
+ 154   1          
+ 155   1          tmp = (SYS_MCLK*ms)/1000; //计算所需的计数值
+ 156   1          tmp = 65536 - tmp;        //计算定时器重载值
+ 157   1          tmp = tmp + 33;           //补偿中断响应延时造成的误差   
+ 158   1          T0RH = (uint8)(tmp>>8);   //定时器重载值拆分为高低字节
+ 159   1          T0RL = (uint8)tmp;
+ 160   1          TMOD &= 0xF0;   //清零T0的控制位
+ 161   1          TMOD |= 0x01;   //配置T0为模式1
+ 162   1          TH0 = T0RH;     //加载T0重载值
+ 163   1          TL0 = T0RL;
+ 164   1          ET0 = 1;        //使能T0中断
+ 165   1          TR0 = 1;        //启动T0
+ 166   1      }
+ 167          /* T0中断服务函数，实现系统定时和按键扫描 */
+ 168          void InterruptTimer0() interrupt 1
+ 169          {
+ 170   1          static uint8 tmr2s = 0;
+ 171   1          static uint8 tmr200ms = 0;
+ 172   1          
+ 173   1          TH0 = T0RH;  //重新加载重载值
+ 174   1          TL0 = T0RL;
+ 175   1          tmr200ms++;  //定时200ms
+ 176   1          if (tmr200ms >= 200)
+ 177   1          {
+ 178   2              tmr200ms = 0;
+ 179   2              flag200ms = 1;
+C51 COMPILER V9.02   MAIN                                                                  01/10/2009 00:34:35 PAGE 4   
+
+ 180   2              tmr2s++;  //定时2s
+ 181   2              if (tmr2s >= 10)
+ 182   2              {
+ 183   3                  tmr2s = 0;
+ 184   3                  flag2s = 1;
+ 185   3              }
+ 186   2          }
+ 187   1          KeyScan();   //执行按键扫描
+ 188   1      }
+ 189            void WriteROM()
+ 190            {
+ 191   1        uint8 i=0;
+ 192   1         LcdWriteCmd(0x40);
+ 193   1         for(i=0;i<64;i++)
+ 194   1         {
+ 195   2              LcdWriteDat(table[i]);
+ 196   2         }
+ 197   1         } 
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    545    ----
+   CONSTANT SIZE    =     94    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----       8
+   DATA SIZE        =      7       9
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =      2    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

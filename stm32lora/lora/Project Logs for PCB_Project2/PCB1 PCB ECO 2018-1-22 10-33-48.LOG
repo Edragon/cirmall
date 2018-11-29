@@ -1,0 +1,9 @@
+Removed Pin From Net: NetName=LCD102 Pin=U1-27
+Removed Pin From Net: NetName=LCD105 Pin=U1-53
+Removed Pin From Net: NetName=LCD104 Pin=U1-55
+Removed Pin From Net: NetName=LCD103 Pin=U1-56
+Added Pin To Net: NetName=LCD102 Pin=U1-38
+Added Pin To Net: NetName=LCD103 Pin=U1-39
+Added Pin To Net: NetName=LCD104 Pin=U1-40
+Added Pin To Net: NetName=LCD105 Pin=U1-41
+Added Room: Name=Sheet2

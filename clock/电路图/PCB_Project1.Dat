@@ -1,0 +1,24 @@
+Field=Comment~String~Comment~100|Field=Description~String~Description~100|Field=Designator~String~Designator~100|Field=Footprint~String~Footprint~100|Field=LibRef~String~LibRef~100|Field=Quantity~Integer~Quantity~100|ReportField=Currency~<none>|ReportField=ProductionQuantity~1|ReportField=ProjectFileName~PCB_Project1.PrjPCB|ReportField=ProjectFullPath~D:\ƒ÷÷”\PCB_Project1.PrjPCB|ReportField=Title~Bill of Materials For Project [PCB_Project1.PrjPCB] (No PCB Document Selected)|ReportField=TotalQuantity~40|ReportField=ReportTime~12:24:36|ReportField=ReportDate~2018/9/22|ReportField=ReportDateTime~2018/9/22 12:24:36|ReportField=OutputName~Bill of Materials|ReportField=OutputType~BOM_PartType|ReportField=GeneratorName~BOM|ReportField=GeneratorDescription~Bill of Materials|ReportField=VariantName~None|ReportField=Address1~|ReportField=Address2~|ReportField=Address3~|ReportField=Address4~|ReportField=ApprovedBy~|ReportField=Author~|ReportField=CheckedBy~|ReportField=CompanyName~|ReportField=CurrentDate~2018/9/22|ReportField=CurrentTime~12:24:20|ReportField=Date~|ReportField=DocumentFullPathAndName~D:\ƒ÷÷”\Sheet1.SchDoc|ReportField=DocumentName~Sheet1.SchDoc|ReportField=DocumentNumber~|ReportField=DrawnBy~|ReportField=Engineer~|ReportField=ImagePath~|ReportField=ModifiedDate~2018/9/22|ReportField=Organization~|ReportField=ProjectName~PCB_Project1.PrjPCB|ReportField=Revision~|ReportField=Rule~|ReportField=SheetNumber~|ReportField=SheetTotal~|ReportField=Time~|ReportField=Title~|ReportField=DataSourceFileName~PCB_Project1.PrjPCB|ReportField=DataSourceFullPath~D:\ƒ÷÷”\PCB_Project1.PrjPCB
+104||C1, C2, C3, C7|0805C|CAP|4
+CE||C4|2817c+|CE|1
+20||C5, C6|0805C|CAP|2
+DIODE||D1|SS14-4007|DIODE|1
+D IN4148||D2|4148YZ|D IN4148|1
+1602||LCD1|LCD1602|1602|1
+CON4||P1, P2, P3|sip4|CON4|3
+CON2||P4|SIP2|CON2|1
+2SC8550||Q1, Q2|SOT23|2SC8550|2
+10K||R3, R4, R5|0805R|RES|3
+1k||R6, R8, R10|0805R|RES|3
+4.7K||R7, R15|0805R|RES|2
+10K||r1|RPZ9|RPZ9|1
+100||R9, R13|0805R|RES|2
+RES||R11, R12, R14|0805R|RES|3
+SW-PB|Switch|S1, S2, S3|SW-AJ24|SW-PB|3
+STC89C52||U1|DIP40|STC89C52|1
+DS1302||U2|DIP8|DS1302|1
+buzzer||U3|BUZZER|buzzer|1
+18B20||U4|18b20|18B20|1
+200|Variable Resistor|W1|RV|RV|1
+12M|Crystal Oscillator|Y1|XTAL|XTAL|1
+XTAL|Crystal Oscillator|Y2|xtal1-X|XTAL|1

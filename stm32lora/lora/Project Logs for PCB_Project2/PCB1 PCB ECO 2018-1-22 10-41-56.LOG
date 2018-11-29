@@ -1,0 +1,5 @@
+Removed Pin From Net: NetName=GND Pin=KEY-4
+Removed Pin From Net: NetName=IRO Pin=U1-10
+Removed Pin From Net: NetName=CE Pin=U1-11
+Added Pin To Net: NetName=IRO Pin=U1-29
+Added Pin To Net: NetName=CE Pin=U1-30

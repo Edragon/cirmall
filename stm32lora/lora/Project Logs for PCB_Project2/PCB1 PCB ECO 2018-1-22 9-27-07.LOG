@@ -1,0 +1,4 @@
+Added Component: Designator=KEY(PCBComponent_1)
+Added Pin To Net: NetName=MCU_NRST Pin=KEY-1
+Added Pin To Net: NetName=GND Pin=KEY-2
+Added Member To Class: ClassName=Sheet2 Member=Component KEY PWR_KEY
