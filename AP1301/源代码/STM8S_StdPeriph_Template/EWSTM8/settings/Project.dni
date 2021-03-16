@@ -1,0 +1,58 @@
+[Stack]
+FillEnabled=0
+OverflowWarningsEnabled=1
+WarningThreshold=90
+SpWarningsEnabled=1
+WarnLogOnly=1
+UseTrigger=1
+TriggerName=main
+LimitSize=0
+ByteLimit=50
+[DebugChecksum]
+Checksum=-1934013560
+[CallStack]
+ShowArgs=0
+[Disassembly]
+MixedMode=1
+[DataSample]
+LogEnabled=0
+GraphEnabled=0
+ShowTimeLog=1
+ShowTimeSum=1
+[DisAssemblyWindow]
+NumStates=_ 1
+State 1=_ 1
+[InstructionProfiling]
+Enabled=_ 0
+[CodeCoverage]
+Enabled=_ 0
+[StackPlugin]
+Enabled=1
+OverflowWarningsEnabled=1
+WarningThreshold=90
+SpWarningsEnabled=1
+WarnHow=0
+UseTrigger=1
+TriggerName=main
+LimitSize=0
+ByteLimit=50
+[Log file]
+LoggingEnabled=_ 0
+LogFile=_ ""
+Category=_ 0
+[TermIOLog]
+LoggingEnabled=_ 0
+LogFile=_ ""
+[Breakpoints]
+Bp0=_ "STD_DATA" "AD_Configuration" 1 0 0 3 0 "" 0 ""
+Count=1
+[Aliases]
+A0=_ "E:\Air Cleaner\AP1301\Software\AP1301_20130831\Libraries\STM8S_StdPeriph_Driver\src\stm8s_adc1.c" ""
+A1=_ "E:\Air Cleaner\AP1301\Software\AP1301_20130831\Libraries\STM8S_StdPeriph_Driver\src\stm8s_tim4.c" ""
+A2=_ "E:\Air Cleaner\AP1301\Software\AP1301_20130831\Project\STM8S_StdPeriph_Template\Filter.c" ""
+A3=_ "E:\Air Cleaner\AP1301\Software\AP1301_20130831\Project\STM8S_StdPeriph_Template\Key.c" "F:\洲钜工作文件\严工\AP1301\AP1301_20130831\Project\STM8S_StdPeriph_Template\Key.c"
+A4=_ "E:\Air Cleaner\AP1301\Software\AP1301_20130831\Project\STM8S_StdPeriph_Template\Sensor.c" ""
+A5=_ "E:\Air Cleaner\AP1301\Software\AP1301_20130831\Project\STM8S_StdPeriph_Template\main.c" "F:\洲钜工作文件\严工\AP1301\AP1301_20130831\Project\STM8S_StdPeriph_Template\main.c"
+A6=_ "E:\Air Cleaner\AP1301\Software\AP1301_20130831\Project\STM8S_StdPeriph_Template\stm8s_it.c" ""
+Count=7
+SuppressDialog=0
